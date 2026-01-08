@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { ArrowRight, Star, Clock, MapPin, Phone } from "lucide-react";
 import { useCategories } from "../hooks/use-restaurant";
 import { useState, useEffect } from "react";
+import KrishnaSpecials from "../components/KrishnaSpecials";
 import heroVideo from "@assets/generated_videos/vegetarian_restaurant_with_delicious_food..mp4";
 
 const HERO_IMAGES = [
@@ -145,7 +146,7 @@ export default function Home() {
                 <ArrowRight size={18} />
               </div>
             </Link>
-            <Link href="/contact">
+            <Link href="/reservation">
               <div className="px-8 py-4 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white rounded-full font-semibold transition-all duration-300 cursor-pointer">
                 Book a Table
               </div>
@@ -188,6 +189,8 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      <KrishnaSpecials />
 
       {/* Featured Categories */}
       <section className="py-24 bg-background">
