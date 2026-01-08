@@ -162,7 +162,7 @@ export default function KrishnaSpecials() {
             viewport={{ once: true }}
             className="font-serif text-5xl md:text-6xl font-bold mb-6"
           >
-            <span className="text-[#f15a24]">Shri Krishna</span>{" "}
+            <span className="text-[#1b4332]">Shri Krishna</span>{" "}
             <span className="text-[#1b4332]">Special Cuisine</span>
           </motion.h2>
           <motion.p 
@@ -226,7 +226,7 @@ export default function KrishnaSpecials() {
                 >
                   <div className={`
                     relative w-48 h-48 md:w-80 md:h-80 rounded-full p-2
-                    ${item.position === 0 ? 'bg-gradient-to-tr from-[#4caf50] to-[#f15a24] shadow-[0_0_50px_rgba(76,175,80,0.3)]' : 'bg-transparent'}
+                    ${item.position === 0 ? 'bg-gradient-to-tr from-[#1b4332] to-[#4caf50] shadow-[0_0_50px_rgba(27,67,50,0.3)]' : 'bg-transparent'}
                   `}>
                     <div className="w-full h-full rounded-full overflow-hidden border-4 border-white shadow-inner bg-white">
                       <img 
