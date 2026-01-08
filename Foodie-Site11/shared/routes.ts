@@ -1,10 +1,11 @@
 import { z } from 'zod';
-import { insertContactMessageSchema, categories, menuItems } from './schema';
+import { insertContactMessageSchema, insertReservationSchema, categories, menuItems } from './schema';
 
 export const errorSchemas = {
   validation: z.object({
     message: z.string(),
     field: z.string().optional(),
+    errors: z.array(z.any()).optional(),
   }),
   notFound: z.object({
     message: z.string(),
@@ -37,7 +38,7 @@ export const api = {
       method: 'GET' as const,
       path: '/api/menu-items',
       input: z.object({
-        categoryId: z.string().optional(), // Query param is string, needs parsing
+        categoryId: z.string().optional(),
       }).optional(),
       responses: {
         200: z.array(z.custom<typeof menuItems.$inferSelect>()),
@@ -56,6 +57,17 @@ export const api = {
       method: 'POST' as const,
       path: '/api/contact',
       input: insertContactMessageSchema,
+      responses: {
+        200: z.object({ success: z.boolean() }),
+        400: errorSchemas.validation,
+      },
+    }
+  },
+  reservation: {
+    submit: {
+      method: 'POST' as const,
+      path: '/api/reservations',
+      input: insertReservationSchema,
       responses: {
         200: z.object({ success: z.boolean() }),
         400: errorSchemas.validation,
