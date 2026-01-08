@@ -256,9 +256,17 @@ export default function KrishnaSpecials() {
                       transition={{ delay: 0.2 }}
                       className="mt-12 text-center max-w-sm px-4"
                     >
-                      <h3 className="font-serif text-3xl md:text-4xl font-bold text-[#1b4332] mb-3 uppercase tracking-wider">
-                        {item.name}
-                      </h3>
+                      <div className="flex items-center justify-center gap-3 mb-3">
+                        {/* Veg Icon beside name */}
+                        <div className="bg-white p-1 rounded-sm shadow-sm border border-gray-100 flex-shrink-0">
+                          <div className="w-4 h-4 border-2 border-green-600 flex items-center justify-center p-[2px]">
+                            <div className="w-full h-full bg-green-600 rounded-full" />
+                          </div>
+                        </div>
+                        <h3 className="font-serif text-3xl md:text-4xl font-bold text-[#1b4332] uppercase tracking-wider">
+                          {item.name}
+                        </h3>
+                      </div>
                       <p className="text-gray-500 text-sm md:text-base leading-relaxed">
                         {item.description}
                       </p>
@@ -270,16 +278,7 @@ export default function KrishnaSpecials() {
           </div>
         </div>
 
-        {/* Progress Indicators */}
-        <div className="flex justify-center flex-wrap gap-2 mt-8 max-w-md mx-auto">
-          {SPECIALS.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => setActiveIndex(idx)}
-              className={`h-2 transition-all duration-300 rounded-full ${activeIndex === idx ? 'w-8 bg-[#4caf50]' : 'w-2 bg-gray-200'}`}
-            />
-          ))}
-        </div>
+        {/* No Progress Indicators - Removed as requested */}
       </div>
     </section>
   );
