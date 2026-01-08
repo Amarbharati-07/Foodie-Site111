@@ -12,7 +12,7 @@ export function Logo({ className }: LogoProps) {
       <img 
         src="/logo.png" 
         alt="Shri Krishna Restaurant" 
-        className="h-16 md:h-24 w-auto object-contain"
+        className="h-full w-auto object-contain mix-blend-multiply"
       />
     </div>
   );

@@ -29,27 +29,30 @@ export function Navigation() {
   return (
     <nav
       className={cn(
-        "fixed w-full z-50 transition-all duration-300 font-sans border-b border-slate-100",
-        scrolled ? "bg-white/95 backdrop-blur-md shadow-sm py-3" : "bg-white py-5"
+        "fixed w-full z-50 transition-all duration-300 font-sans",
+        scrolled ? "py-2" : "py-4"
       )}
     >
       <div className="container mx-auto px-4 md:px-6">
-        <div className="flex items-center justify-between relative">
+        <div className={cn(
+          "flex items-center justify-between px-6 py-2 rounded-full transition-all duration-300 border border-slate-100",
+          scrolled ? "bg-white/95 backdrop-blur-md shadow-lg" : "bg-white shadow-md"
+        )}>
           <Link href="/">
             <div className="cursor-pointer">
-              <Logo />
+              <Logo className="h-12 md:h-16" />
             </div>
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center space-x-12">
+          <div className="hidden md:flex items-center space-x-10">
             {navLinks.map((link) => (
               <Link key={link.name} href={link.href}>
                 <div className={cn(
-                  "text-sm font-bold tracking-[0.15em] uppercase cursor-pointer relative py-1 transition-all duration-300",
+                  "text-xs font-bold tracking-[0.1em] uppercase cursor-pointer relative py-1 transition-all duration-300",
                   location === link.href 
-                    ? "text-[#1b4332] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[3px] after:bg-[#1b4332]" 
-                    : "text-[#4b5563] hover:text-[#1b4332]"
+                    ? "text-[#52b788] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-[#52b788]" 
+                    : "text-[#4b5563] hover:text-[#52b788]"
                 )}>
                   {link.name}
                 </div>
@@ -58,8 +61,8 @@ export function Navigation() {
             <a 
               href="tel:+917028684786" 
               className={cn(
-                "flex items-center space-x-2 px-8 py-2.5 rounded-full font-bold text-sm transition-all duration-300 shadow-sm",
-                "bg-[#1b4332] text-white hover:bg-[#2d6a4f] hover:shadow-md active:scale-95 border border-[#1b4332]/20"
+                "flex items-center space-x-2 px-6 py-2.5 rounded-full font-bold text-sm transition-all duration-300 shadow-sm",
+                "bg-[#52b788] text-white hover:bg-[#40916c] hover:shadow-md active:scale-95"
               )}
             >
               <Phone size={14} fill="currentColor" />
