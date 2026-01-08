@@ -3,6 +3,7 @@ import type { Server } from "http";
 import { storage } from "./storage";
 import { api } from "@shared/routes";
 import { z } from "zod";
+import { insertReviewSchema } from "@shared/schema";
 
 export async function registerRoutes(
   httpServer: Server,
@@ -61,6 +62,25 @@ export async function registerRoutes(
       } else {
         res.status(500).json({ message: "Internal server error" });
       }
+    }
+  });
+
+  app.get("/api/reviews", async (_req, res) => {
+    try {
+      const reviews = await storage.getReviews();
+      res.json(reviews);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch reviews" });
+    }
+  });
+
+  app.post("/api/reviews", async (req, res) => {
+    try {
+      const parsed = insertReviewSchema.parse(req.body);
+      const review = await storage.createReview(parsed);
+      res.json(review);
+    } catch (error) {
+      res.status(400).json({ error: "Invalid review data" });
     }
   });
 

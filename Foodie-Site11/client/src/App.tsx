@@ -12,6 +12,7 @@ import About from "@/pages/About";
 import Gallery from "@/pages/Gallery";
 import Contact from "@/pages/Contact";
 import Reservation from "@/pages/Reservation";
+import Reviews from "@/pages/Reviews";
 import NotFound from "@/pages/not-found";
 
 // Global Components
@@ -36,6 +37,7 @@ function Router() {
       <Route path="/gallery" component={Gallery} />
       <Route path="/contact" component={Contact} />
       <Route path="/reservation" component={Reservation} />
+      <Route path="/reviews" component={Reviews} />
       <Route component={NotFound} />
     </Switch>
   );

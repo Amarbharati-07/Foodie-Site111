@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "Arjun Sharma",
+    "rating": 5,
+    "comment": "Best pure veg restaurant in Ambernath! Their Special Paneer is a must-try.",
+    "location": "Ambernath",
+    "date": "2025-12-15"
+  },
+  {
+    "id": 2,
+    "name": "Priya Patil",
+    "rating": 4,
+    "comment": "Love the Mysore Dosa and the quick service. Very clean and family-friendly.",
+    "location": "Ulhasnagar",
+    "date": "2025-12-20"
+  },
+  {
+    "id": 3,
+    "name": "Rahul Verma",
+    "rating": 5,
+    "comment": "Authentic taste and premium quality. The new rotating special section on the menu is great!",
+    "location": "Ambernath",
+    "date": "2026-01-05"
+  }
+]

@@ -3,6 +3,8 @@ import {
   type MenuItem,
   type InsertContactMessage,
   type InsertReservation,
+  type Review,
+  type InsertReview,
 } from "@shared/schema";
 import fs from "fs/promises";
 import path from "path";
@@ -14,14 +16,38 @@ export interface IStorage {
   getMenuItemsByCategory(categoryId: number): Promise<MenuItem[]>;
   createContactMessage(message: InsertContactMessage): Promise<void>;
   createReservation(reservation: InsertReservation): Promise<void>;
+  getReviews(): Promise<Review[]>;
+  createReview(review: InsertReview): Promise<Review>;
   seedData(): Promise<void>;
 }
 
 export class DatabaseStorage implements IStorage {
   private reservationFile = path.resolve(process.cwd(), "reservation.json");
+  private reviewsFile = path.resolve(process.cwd(), "reviews.json");
   private categories: Category[] = [];
   private menuItems: MenuItem[] = [];
   private contactMessages: any[] = [];
+
+  async getReviews(): Promise<Review[]> {
+    try {
+      const data = await fs.readFile(this.reviewsFile, "utf-8");
+      return JSON.parse(data);
+    } catch (e) {
+      return [];
+    }
+  }
+
+  async createReview(review: InsertReview): Promise<Review> {
+    const reviews = await this.getReviews();
+    const newReview: Review = {
+      id: Date.now(),
+      date: new Date().toISOString().split('T')[0],
+      ...review
+    };
+    reviews.push(newReview);
+    await fs.writeFile(this.reviewsFile, JSON.stringify(reviews, null, 2));
+    return newReview;
+  }
 
   async getCategories(): Promise<Category[]> {
     return this.categories;

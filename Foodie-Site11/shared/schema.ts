@@ -37,6 +37,15 @@ export const insertReservationSchema = z.object({
   guests: z.number().min(1, "At least 1 guest required"),
 });
 
+export const insertReviewSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  rating: z.number().min(1).max(5),
+  comment: z.string().min(1, "Review text is required"),
+  location: z.string().optional(),
+});
+
 export type InsertContactMessage = z.infer<typeof insertContactMessageSchema>;
 export type Reservation = z.infer<typeof insertReservationSchema> & { id: number };
 export type InsertReservation = z.infer<typeof insertReservationSchema>;
+export type Review = z.infer<typeof insertReviewSchema> & { id: number; date: string };
+export type InsertReview = z.infer<typeof insertReviewSchema>;
