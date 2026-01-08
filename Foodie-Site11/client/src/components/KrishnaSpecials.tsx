@@ -127,13 +127,15 @@ const SPECIALS = [
 
 export default function KrishnaSpecials() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
+    if (isPaused) return;
     const timer = setInterval(() => {
       handleNext();
     }, 5000);
     return () => clearInterval(timer);
-  }, [activeIndex]);
+  }, [activeIndex, isPaused]);
 
   const handleNext = () => {
     setActiveIndex((prev) => (prev + 1) % SPECIALS.length);
@@ -153,7 +155,11 @@ export default function KrishnaSpecials() {
   };
 
   return (
-    <section className="py-24 bg-white overflow-hidden relative">
+    <section 
+      className="py-24 bg-white overflow-hidden relative"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <motion.h2 
@@ -176,7 +182,7 @@ export default function KrishnaSpecials() {
           </motion.p>
         </div>
 
-        <div className="relative h-[450px] flex items-center justify-center">
+        <div className="relative h-[550px] flex items-center justify-center">
           {/* Controls */}
           <button 
             onClick={handlePrev}
@@ -206,7 +212,7 @@ export default function KrishnaSpecials() {
                   }}
                   animate={{ 
                     opacity: item.position === 0 ? 1 : 0.4,
-                    scale: item.position === 0 ? 1 : 0.7,
+                    scale: item.position === 0 ? 1.2 : 0.7,
                     x: item.position * (window.innerWidth < 768 ? 160 : 320),
                     filter: item.position === 0 ? "blur(0px)" : "blur(2px)",
                     zIndex: item.position === 0 ? 20 : 10
@@ -225,8 +231,8 @@ export default function KrishnaSpecials() {
                   className="absolute flex flex-col items-center"
                 >
                   <div className={`
-                    relative w-48 h-48 md:w-80 md:h-80 rounded-full p-2
-                    ${item.position === 0 ? 'bg-gradient-to-tr from-[#1b4332] to-[#4caf50] shadow-[0_0_50px_rgba(27,67,50,0.3)]' : 'bg-transparent'}
+                    relative w-56 h-56 md:w-96 md:h-96 rounded-full p-2
+                    ${item.position === 0 ? 'bg-gradient-to-tr from-[#1b4332] to-[#4caf50] shadow-[0_0_60px_rgba(27,67,50,0.4)]' : 'bg-transparent'}
                   `}>
                     <div className="w-full h-full rounded-full overflow-hidden border-4 border-white shadow-inner bg-white">
                       <img 
@@ -242,9 +248,9 @@ export default function KrishnaSpecials() {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.2 }}
-                      className="mt-10 text-center max-w-sm px-4"
+                      className="mt-12 text-center max-w-sm px-4"
                     >
-                      <h3 className="font-serif text-2xl md:text-3xl font-bold text-[#1b4332] mb-3 uppercase tracking-wider">
+                      <h3 className="font-serif text-3xl md:text-4xl font-bold text-[#1b4332] mb-3 uppercase tracking-wider">
                         {item.name}
                       </h3>
                       <p className="text-gray-500 text-sm md:text-base leading-relaxed">
