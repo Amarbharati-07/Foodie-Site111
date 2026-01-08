@@ -263,7 +263,7 @@ export default function KrishnaSpecials() {
                           {item.name}
                         </h3>
                       </div>
-                      <p className="text-gray-400 text-sm md:text-base font-light leading-relaxed max-w-xs md:max-w-sm">
+                      <p className="text-[#2d3436] text-base md:text-lg font-medium leading-relaxed max-w-sm mx-auto">
                         {item.description}
                       </p>
                     </motion.div>
