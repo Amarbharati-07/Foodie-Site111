@@ -101,7 +101,7 @@ export default function Menu() {
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="font-serif text-5xl md:text-8xl font-bold mb-8 tracking-tighter text-[#1b4332]"
+            className="font-serif text-4xl md:text-6xl font-bold mb-8 tracking-tighter text-[#1b4332]"
           >
             OUR MENU
           </motion.h1>
