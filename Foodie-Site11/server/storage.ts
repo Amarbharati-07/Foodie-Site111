@@ -1,15 +1,16 @@
-import { db } from "./db";
 import {
-  categories,
-  menuItems,
-  contactMessages,
-  reservations,
   type Category,
   type MenuItem,
   type InsertContactMessage,
   type InsertReservation,
+  categories,
+  menuItems,
+  contactMessages
 } from "@shared/schema";
+import { db } from "./db";
 import { eq } from "drizzle-orm";
+import fs from "fs/promises";
+import path from "path";
 
 export interface IStorage {
   getCategories(): Promise<Category[]>;
@@ -22,6 +23,8 @@ export interface IStorage {
 }
 
 export class DatabaseStorage implements IStorage {
+  private reservationFile = path.resolve(process.cwd(), "reservation.json");
+
   async getCategories(): Promise<Category[]> {
     return await db.select().from(categories);
   }
@@ -47,8 +50,37 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createReservation(reservation: InsertReservation): Promise<void> {
-    await db.insert(reservations).values(reservation);
+    try {
+      let currentReservations: any[] = [];
+      try {
+        const data = await fs.readFile(this.reservationFile, "utf-8");
+        currentReservations = JSON.parse(data);
+      } catch (e) {
+        // If file doesn't exist or is invalid, start with empty array
+        currentReservations = [];
+      }
+      
+      const newReservation = {
+        id: Date.now(),
+        ...reservation
+      };
+      
+      currentReservations.push(newReservation);
+      await fs.writeFile(this.reservationFile, JSON.stringify(currentReservations, null, 2));
+    } catch (error) {
+      console.error("Error saving reservation to file:", error);
+      throw new Error("Failed to save reservation locally.");
+    }
   }
+
+  async seedData(): Promise<void> {
+    const existingCats = await this.getCategories();
+    if (existingCats.length > 0) return;
+    // ... rest of seed data logic remains for other non-reservation features
+  }
+}
+
+export const storage = new DatabaseStorage();
 
   async seedData(): Promise<void> {
     const existingCats = await this.getCategories();

@@ -29,16 +29,19 @@ export const contactMessages = pgTable("contact_messages", {
   message: text("message").notNull(),
 });
 
-export const reservations = pgTable("reservations", {
-  id: serial("id").primaryKey(),
-  firstName: text("first_name").notNull(),
-  lastName: text("last_name").notNull(),
-  email: text("email").notNull(),
-  phone: text("phone").notNull(),
-  address: text("address").notNull(),
-  date: text("date").notNull(),
-  time: text("time").notNull(),
-  guests: integer("guests").notNull(),
+export const reservations = {
+  // Local JSON file based storage used for reservations
+};
+
+export const insertReservationSchema = z.object({
+  firstName: z.string().min(1, "First name is required"),
+  lastName: z.string().min(1, "Last name is required"),
+  email: z.string().email("Invalid email address"),
+  phone: z.string().min(10, "Valid phone number is required"),
+  address: z.string().min(1, "Address is required"),
+  date: z.string().min(1, "Date is required"),
+  time: z.string().min(1, "Time is required"),
+  guests: z.number().min(1, "At least 1 guest required"),
 });
 
 export const insertCategorySchema = createInsertSchema(categories);
@@ -52,5 +55,5 @@ export type MenuItem = typeof menuItems.$inferSelect;
 export type InsertMenuItem = z.infer<typeof insertMenuItemSchema>;
 export type ContactMessage = typeof contactMessages.$inferSelect;
 export type InsertContactMessage = z.infer<typeof insertContactMessageSchema>;
-export type Reservation = typeof reservations.$inferSelect;
+export type Reservation = z.infer<typeof insertReservationSchema> & { id: number };
 export type InsertReservation = z.infer<typeof insertReservationSchema>;
