@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* SHRI KRISHNA - Fresh Green & White Theme */
+  --background: 0 0% 100%;         /* Pure White */
+  --foreground: 142 70% 15%;      /* Deep Forest Green for text */
+  
+  --primary: 142 76% 36%;         /* Fresh Leaf Green */
+  --primary-foreground: 0 0% 100%;
+  
+  --secondary: 142 50% 95%;       /* Very Light Green for sections */
+  --secondary-foreground: 142 70% 15%;
+  
+  --muted: 142 20% 96%;           /* Muted Soft Green */
+  --muted-foreground: 142 30% 35%;
+  
+  --accent: 142 76% 36%;          /* Accent Green */
+  --accent-foreground: 0 0% 100%;
+  
+  --border: 142 20% 90%;
+  --input: 142 20% 90%;
+  --ring: 142 76% 36%;
+  
+  --radius: 0.75rem;              /* More rounded for friendly feel */
+  
+  /* Custom Font Variables */
+  --font-serif: 'Cinzel', serif;  /* Elegant divine feel */
+  --font-sans: 'Montserrat', sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    @apply tracking-tight font-medium;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--primary) / 0.3);
+  border-radius: 20px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: hsl(var(--primary) / 0.6);
+}
+
+.text-divine {
+  color: hsl(var(--primary));
+}
+
+.bg-krishna {
+  background-color: hsl(var(--primary));
+}
+
+.bg-veg {
+  background-color: hsl(var(--secondary));
+}
