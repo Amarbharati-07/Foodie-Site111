@@ -116,12 +116,11 @@ export default function Menu() {
             </p>
             
             <Button 
-              variant="outline"
               onClick={handlePdfView}
-              className="rounded-full px-10 h-14 gap-3 border-[#1b4332] text-[#1b4332] bg-white hover:bg-[#1b4332] hover:text-white transition-all shadow-md group"
+              className="rounded-full px-10 h-14 gap-3 bg-[#4caf50] text-white hover:bg-[#43a047] transition-all shadow-md group border-none font-bold text-lg tracking-wide"
             >
               <FileText size={20} className="group-hover:rotate-12 transition-transform" />
-              <span className="font-bold text-lg tracking-wide">Download Menu PDF</span>
+              <span>Download Menu PDF</span>
             </Button>
           </motion.div>
         </div>
@@ -143,11 +142,10 @@ export default function Menu() {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button 
-                variant="outline" 
-                className="w-full sm:w-[240px] h-12 rounded-xl justify-between border-stone-100 bg-stone-50 text-stone-600 hover:bg-stone-100 font-medium"
+                className="w-full sm:w-[240px] h-12 rounded-xl justify-between bg-[#4caf50] text-white hover:bg-[#43a047] font-bold border-none shadow-sm"
               >
                 {activeCategory ? activeCategory.name : "All Categories"}
-                <ChevronDown size={16} className="opacity-50" />
+                <ChevronDown size={16} className="opacity-70" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-[240px] rounded-xl p-2 z-[100] bg-white border border-stone-200 shadow-2xl">
