@@ -45,14 +45,14 @@ export function Navigation() {
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center space-x-12">
+          <div className="hidden md:flex items-center space-x-4">
             {navLinks.map((link) => (
               <Link key={link.name} href={link.href}>
                 <div className={cn(
-                  "text-base font-bold tracking-[0.1em] uppercase cursor-pointer relative py-1 transition-all duration-300",
+                  "px-6 py-2 rounded-full text-sm font-bold tracking-[0.1em] uppercase cursor-pointer transition-all duration-300",
                   location === link.href 
-                    ? "text-[#4caf50] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-[#4caf50]" 
-                    : "text-[#4b5563] hover:text-[#4caf50]"
+                    ? "bg-[#4caf50] text-white shadow-md shadow-[#4caf50]/20" 
+                    : "text-[#4b5563] hover:bg-[#f0fdf4] hover:text-[#4caf50]"
                 )}>
                   {link.name}
                 </div>
@@ -61,11 +61,11 @@ export function Navigation() {
             <a 
               href="tel:+917028684786" 
               className={cn(
-                "flex items-center space-x-3 px-10 py-3.5 rounded-full font-bold text-lg transition-all duration-300 shadow-sm",
+                "flex items-center space-x-2 px-8 py-2.5 rounded-full font-bold text-sm transition-all duration-300 shadow-sm",
                 "bg-[#4caf50] text-white hover:bg-[#43a047] hover:shadow-md active:scale-95"
               )}
             >
-              <Phone size={18} fill="currentColor" />
+              <Phone size={14} fill="currentColor" />
               <span>Call Now</span>
             </a>
           </div>
