@@ -5,7 +5,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 const SPECIALS = [
   {
     id: 1,
-    name: "Shree Krishna Special Paneer",
+    name: "Shri Krishna Special Paneer",
     image: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&q=80",
     description: "Our signature melt-in-your-mouth paneer delicacy prepared with secret spices."
   },
@@ -32,6 +32,96 @@ const SPECIALS = [
     name: "Crispy Masala Dosa",
     image: "https://images.unsplash.com/photo-1610192244261-3f33de3f55e4?auto=format&fit=crop&q=80",
     description: "Golden crispy crepe filled with spiced potato mash, served with coconut chutney."
+  },
+  {
+    id: 6,
+    name: "Mysore Masala Dosa",
+    image: "https://images.unsplash.com/photo-1630406184470-7fd4440e82ae?auto=format&fit=crop&q=80",
+    description: "Spicy and delicious Mysore style dosa with signature red chutney."
+  },
+  {
+    id: 7,
+    name: "Veg Manchurian",
+    image: "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&q=80",
+    description: "Indo-Chinese classic vegetable balls in a tangy and spicy sauce."
+  },
+  {
+    id: 8,
+    name: "Hakka Noodles",
+    image: "https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&q=80",
+    description: "Stir-fried noodles with crisp vegetables and oriental seasonings."
+  },
+  {
+    id: 9,
+    name: "Paneer Chilli",
+    image: "https://images.unsplash.com/photo-1600335895229-6e75511892c8?auto=format&fit=crop&q=80",
+    description: "Fried paneer cubes tossed in a spicy and tangy chilli sauce."
+  },
+  {
+    id: 10,
+    name: "Veg Burger",
+    image: "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&q=80",
+    description: "Classic vegetable patty with fresh greens and creamy sauce."
+  },
+  {
+    id: 11,
+    name: "Cheese Burger",
+    image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&q=80",
+    description: "Loaded with melting cheese and our signature vegetable patty."
+  },
+  {
+    id: 12,
+    name: "Tandoori Paneer",
+    image: "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&q=80",
+    description: "Char-grilled paneer cubes marinated in traditional Indian spices."
+  },
+  {
+    id: 13,
+    name: "Butter Naan",
+    image: "https://images.unsplash.com/photo-1626074353765-517a681e40be?auto=format&fit=crop&q=80",
+    description: "Soft and fluffy Indian bread topped with a generous layer of butter."
+  },
+  {
+    id: 14,
+    name: "Schezwan Rice",
+    image: "https://images.unsplash.com/photo-1538329972958-465d6d2166e3?auto=format&fit=crop&q=80",
+    description: "Spicy fried rice tossed in homemade Schezwan sauce."
+  },
+  {
+    id: 15,
+    name: "Veg Soup",
+    image: "https://images.unsplash.com/photo-1547592166-23acbe3a624b?auto=format&fit=crop&q=80",
+    description: "Hot and healthy vegetable soup prepared daily."
+  },
+  {
+    id: 16,
+    name: "Paneer Butter Masala",
+    image: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&q=80",
+    description: "Rich and creamy tomato-based gravy with soft paneer cubes."
+  },
+  {
+    id: 17,
+    name: "Medu Vada",
+    image: "https://images.unsplash.com/photo-1626132646529-5aa212ddbae4?auto=format&fit=crop&q=80",
+    description: "Crispy fried lentil donuts served with sambhar and chutney."
+  },
+  {
+    id: 18,
+    name: "Idli Sambhar",
+    image: "https://images.unsplash.com/photo-1589301760576-416b71151a73?auto=format&fit=crop&q=80",
+    description: "Steamed rice cakes served with flavorful lentil soup."
+  },
+  {
+    id: 19,
+    name: "Veg Kolhapuri",
+    image: "https://images.unsplash.com/photo-1585937421612-70a008356f36?auto=format&fit=crop&q=80",
+    description: "Spicy vegetable medley from the heart of Maharashtra."
+  },
+  {
+    id: 20,
+    name: "Hyderabadi Biryani",
+    image: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&q=80",
+    description: "Spicy and aromatic dum biryani with assorted vegetables."
   }
 ];
 
@@ -154,7 +244,7 @@ export default function KrishnaSpecials() {
                       transition={{ delay: 0.2 }}
                       className="mt-10 text-center max-w-sm px-4"
                     >
-                      <h3 className="font-serif text-2xl md:text-3xl font-bold text-[#1b4332] mb-3">
+                      <h3 className="font-serif text-2xl md:text-3xl font-bold text-[#1b4332] mb-3 uppercase tracking-wider">
                         {item.name}
                       </h3>
                       <p className="text-gray-500 text-sm md:text-base leading-relaxed">
@@ -169,7 +259,7 @@ export default function KrishnaSpecials() {
         </div>
 
         {/* Progress Indicators */}
-        <div className="flex justify-center gap-2 mt-8">
+        <div className="flex justify-center flex-wrap gap-2 mt-8 max-w-md mx-auto">
           {SPECIALS.map((_, idx) => (
             <button
               key={idx}
