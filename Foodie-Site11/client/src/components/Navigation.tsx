@@ -24,7 +24,6 @@ export function Navigation() {
     { name: "About", href: "/about" },
     { name: "Gallery", href: "/gallery" },
     { name: "Contact", href: "/contact" },
-    { name: "Reviews", href: "/reviews" },
     { name: "Reservation", href: "/reservation" },
   ];
 

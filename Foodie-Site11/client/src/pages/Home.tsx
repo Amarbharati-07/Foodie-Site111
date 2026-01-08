@@ -1,9 +1,10 @@
-import { motion } from "framer-motion";
+import { motion } from "react";
 import { Link } from "wouter";
 import { ArrowRight, Star, Clock, MapPin, Phone } from "lucide-react";
 import { useCategories } from "../hooks/use-restaurant";
 import { useState, useEffect } from "react";
 import KrishnaSpecials from "../components/KrishnaSpecials";
+import Reviews from "./Reviews";
 import heroVideo from "@assets/generated_videos/vegetarian_restaurant_with_delicious_food..mp4";
 
 const HERO_IMAGES = [
@@ -248,6 +249,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Reviews Section */}
+      <Reviews />
 
       {/* CTA Section */}
       <section className="py-24 bg-foreground text-white relative overflow-hidden">
