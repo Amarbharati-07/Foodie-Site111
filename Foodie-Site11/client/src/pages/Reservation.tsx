@@ -1,31 +1,35 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSubmitContact } from "@/hooks/use-restaurant";
+import { useSubmitReservation } from "@/hooks/use-restaurant";
 import { api } from "@shared/routes";
 import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Calendar, Users, User } from "lucide-react";
 import { motion } from "framer-motion";
 
 // Helper to coerce types for form
-const contactFormSchema = api.contact.submit.input;
-type ContactFormValues = z.infer<typeof contactFormSchema>;
+const reservationFormSchema = api.reservation.submit.input;
+type ReservationFormValues = z.infer<typeof reservationFormSchema>;
 
 export default function Reservation() {
   const { toast } = useToast();
-  const submitMutation = useSubmitContact();
+  const submitMutation = useSubmitReservation();
   
-  const form = useForm<ContactFormValues>({
-    resolver: zodResolver(contactFormSchema),
+  const form = useForm<ReservationFormValues>({
+    resolver: zodResolver(reservationFormSchema),
     defaultValues: {
-      name: "",
+      firstName: "",
+      lastName: "",
       email: "",
       phone: "",
-      message: ""
+      address: "",
+      date: "",
+      time: "",
+      guests: 2
     }
   });
 
-  const onSubmit = (data: ContactFormValues) => {
+  const onSubmit = (data: ReservationFormValues) => {
     submitMutation.mutate(data, {
       onSuccess: () => {
         toast({
@@ -126,7 +130,7 @@ export default function Reservation() {
             </div>
           </motion.div>
 
-          {/* Contact Form */}
+          {/* Reservation Form */}
           <motion.div 
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -134,57 +138,135 @@ export default function Reservation() {
             className="lg:w-2/3"
           >
             <div className="bg-white p-8 md:p-10 rounded-2xl shadow-xl border border-border">
-              <h3 className="font-serif text-3xl font-bold mb-2">Table Reservation</h3>
+              <h3 className="font-serif text-3xl font-bold mb-2 text-[#1b4332]">Table Reservation</h3>
               <p className="text-muted-foreground mb-8">Please fill in the details to request a table.</p>
 
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground">Your Name</label>
-                    <input
-                      {...form.register("name")}
-                      className="w-full px-4 py-3 rounded-lg border border-border bg-muted/20 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
-                      placeholder="John Doe"
-                    />
-                    {form.formState.errors.name && <p className="text-destructive text-xs">{form.formState.errors.name.message}</p>}
+                    <label className="text-sm font-bold text-foreground">First Name</label>
+                    <div className="relative">
+                      <User className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" size={18} />
+                      <input
+                        {...form.register("firstName")}
+                        className="w-full pl-12 pr-4 py-3 rounded-lg border border-border bg-muted/20 focus:outline-none focus:ring-2 focus:ring-[#4caf50]/20 focus:border-[#4caf50] transition-all"
+                        placeholder="John"
+                        required
+                      />
+                    </div>
+                    {form.formState.errors.firstName && <p className="text-destructive text-xs">{form.formState.errors.firstName.message}</p>}
                   </div>
                   
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground">Phone Number</label>
-                    <input
-                      {...form.register("phone")}
-                      className="w-full px-4 py-3 rounded-lg border border-border bg-muted/20 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
-                      placeholder="+91 9876543210"
-                    />
+                    <label className="text-sm font-bold text-foreground">Last Name</label>
+                    <div className="relative">
+                      <User className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" size={18} />
+                      <input
+                        {...form.register("lastName")}
+                        className="w-full pl-12 pr-4 py-3 rounded-lg border border-border bg-muted/20 focus:outline-none focus:ring-2 focus:ring-[#4caf50]/20 focus:border-[#4caf50] transition-all"
+                        placeholder="Doe"
+                        required
+                      />
+                    </div>
+                    {form.formState.errors.lastName && <p className="text-destructive text-xs">{form.formState.errors.lastName.message}</p>}
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold text-foreground">Contact Number</label>
+                    <div className="relative">
+                      <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" size={18} />
+                      <input
+                        {...form.register("phone")}
+                        className="w-full pl-12 pr-4 py-3 rounded-lg border border-border bg-muted/20 focus:outline-none focus:ring-2 focus:ring-[#4caf50]/20 focus:border-[#4caf50] transition-all"
+                        placeholder="+91 9876543210"
+                        required
+                      />
+                    </div>
                     {form.formState.errors.phone && <p className="text-destructive text-xs">{form.formState.errors.phone.message}</p>}
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold text-foreground">Email Address</label>
+                    <div className="relative">
+                      <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" size={18} />
+                      <input
+                        {...form.register("email")}
+                        type="email"
+                        className="w-full pl-12 pr-4 py-3 rounded-lg border border-border bg-muted/20 focus:outline-none focus:ring-2 focus:ring-[#4caf50]/20 focus:border-[#4caf50] transition-all"
+                        placeholder="john@example.com"
+                        required
+                      />
+                    </div>
+                    {form.formState.errors.email && <p className="text-destructive text-xs">{form.formState.errors.email.message}</p>}
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-foreground">Email Address</label>
-                  <input
-                    {...form.register("email")}
-                    className="w-full px-4 py-3 rounded-lg border border-border bg-muted/20 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
-                    placeholder="john@example.com"
-                  />
-                  {form.formState.errors.email && <p className="text-destructive text-xs">{form.formState.errors.email.message}</p>}
+                  <label className="text-sm font-bold text-foreground">Address</label>
+                  <div className="relative">
+                    <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" size={18} />
+                    <input
+                      {...form.register("address")}
+                      className="w-full pl-12 pr-4 py-3 rounded-lg border border-border bg-muted/20 focus:outline-none focus:ring-2 focus:ring-[#4caf50]/20 focus:border-[#4caf50] transition-all"
+                      placeholder="Your full address"
+                      required
+                    />
+                  </div>
+                  {form.formState.errors.address && <p className="text-destructive text-xs">{form.formState.errors.address.message}</p>}
                 </div>
 
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-foreground">Message</label>
-                  <textarea
-                    {...form.register("message")}
-                    rows={5}
-                    className="w-full px-4 py-3 rounded-lg border border-border bg-muted/20 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all resize-none"
-                    placeholder="Tell us about your experience..."
-                  />
-                  {form.formState.errors.message && <p className="text-destructive text-xs">{form.formState.errors.message.message}</p>}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold text-foreground">Reservation Date</label>
+                    <div className="relative">
+                      <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" size={18} />
+                      <input
+                        {...form.register("date")}
+                        type="date"
+                        className="w-full pl-12 pr-4 py-3 rounded-lg border border-border bg-muted/20 focus:outline-none focus:ring-2 focus:ring-[#4caf50]/20 focus:border-[#4caf50] transition-all"
+                        required
+                      />
+                    </div>
+                    {form.formState.errors.date && <p className="text-destructive text-xs">{form.formState.errors.date.message}</p>}
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold text-foreground">Reservation Time</label>
+                    <div className="relative">
+                      <Clock className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" size={18} />
+                      <input
+                        {...form.register("time")}
+                        type="time"
+                        className="w-full pl-12 pr-4 py-3 rounded-lg border border-border bg-muted/20 focus:outline-none focus:ring-2 focus:ring-[#4caf50]/20 focus:border-[#4caf50] transition-all"
+                        required
+                      />
+                    </div>
+                    {form.formState.errors.time && <p className="text-destructive text-xs">{form.formState.errors.time.message}</p>}
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold text-foreground">Number of Guests</label>
+                    <div className="relative">
+                      <Users className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" size={18} />
+                      <input
+                        {...form.register("guests", { valueAsNumber: true })}
+                        type="number"
+                        min="1"
+                        max="20"
+                        className="w-full pl-12 pr-4 py-3 rounded-lg border border-border bg-muted/20 focus:outline-none focus:ring-2 focus:ring-[#4caf50]/20 focus:border-[#4caf50] transition-all"
+                        required
+                      />
+                    </div>
+                    {form.formState.errors.guests && <p className="text-destructive text-xs">{form.formState.errors.guests.message}</p>}
+                  </div>
                 </div>
 
                 <button
                   type="submit"
                   disabled={submitMutation.isPending}
-                  className="w-full md:w-auto px-10 py-4 bg-primary text-white font-bold rounded-lg shadow-lg shadow-primary/30 hover:shadow-xl hover:-translate-y-1 hover:bg-primary/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                  className="w-full md:w-auto px-10 py-4 bg-[#4caf50] text-white font-bold rounded-full shadow-lg shadow-[#4caf50]/30 hover:shadow-xl hover:-translate-y-1 hover:bg-[#43a047] transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                 >
                   {submitMutation.isPending ? "Requesting..." : "Reserve Now"}
                 </button>

@@ -3,9 +3,11 @@ import {
   categories,
   menuItems,
   contactMessages,
+  reservations,
   type Category,
   type MenuItem,
   type InsertContactMessage,
+  type InsertReservation,
 } from "@shared/schema";
 import { eq } from "drizzle-orm";
 
@@ -15,6 +17,7 @@ export interface IStorage {
   getMenuItems(categoryId?: number): Promise<MenuItem[]>;
   getMenuItemsByCategory(categoryId: number): Promise<MenuItem[]>;
   createContactMessage(message: InsertContactMessage): Promise<void>;
+  createReservation(reservation: InsertReservation): Promise<void>;
   seedData(): Promise<void>;
 }
 
@@ -41,6 +44,10 @@ export class DatabaseStorage implements IStorage {
 
   async createContactMessage(message: InsertContactMessage): Promise<void> {
     await db.insert(contactMessages).values(message);
+  }
+
+  async createReservation(reservation: InsertReservation): Promise<void> {
+    await db.insert(reservations).values(reservation);
   }
 
   async seedData(): Promise<void> {

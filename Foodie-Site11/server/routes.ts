@@ -50,5 +50,19 @@ export async function registerRoutes(
     }
   });
 
+  app.post(api.reservation.submit.path, async (req, res) => {
+    try {
+      const reservation = api.reservation.submit.input.parse(req.body);
+      await storage.createReservation(reservation);
+      res.json({ success: true });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        res.status(400).json({ message: "Validation failed", errors: error.errors });
+      } else {
+        res.status(500).json({ message: "Internal server error" });
+      }
+    }
+  });
+
   return httpServer;
 }
