@@ -51,8 +51,8 @@ export function Navigation() {
                 <div className={cn(
                   "text-base font-bold tracking-[0.1em] uppercase cursor-pointer relative py-1 transition-all duration-300",
                   location === link.href 
-                    ? "text-[#52b788] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-[#52b788]" 
-                    : "text-[#4b5563] hover:text-[#52b788]"
+                    ? "text-[#4caf50] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-[#4caf50]" 
+                    : "text-[#4b5563] hover:text-[#4caf50]"
                 )}>
                   {link.name}
                 </div>
@@ -62,7 +62,7 @@ export function Navigation() {
               href="tel:+917028684786" 
               className={cn(
                 "flex items-center space-x-3 px-10 py-3.5 rounded-full font-bold text-lg transition-all duration-300 shadow-sm",
-                "bg-[#52b788] text-white hover:bg-[#40916c] hover:shadow-md active:scale-95"
+                "bg-[#4caf50] text-white hover:bg-[#43a047] hover:shadow-md active:scale-95"
               )}
             >
               <Phone size={18} fill="currentColor" />
