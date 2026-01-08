@@ -156,17 +156,17 @@ export default function KrishnaSpecials() {
 
   return (
     <section 
-      className="py-24 bg-white overflow-hidden relative"
+      className="py-16 md:py-20 bg-white overflow-hidden relative"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-serif text-5xl md:text-6xl font-bold mb-6"
+            className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold mb-4"
           >
             <span className="text-[#1b4332]">Shri Krishna</span>{" "}
             <span className="text-[#1b4332]">Special Cuisine</span>
@@ -176,98 +176,94 @@ export default function KrishnaSpecials() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-gray-600 text-lg max-w-2xl mx-auto italic"
+            className="text-gray-500 text-base md:text-lg max-w-2xl mx-auto italic font-light"
           >
             Indulge in pure vegetarian culinary artistry, where tradition meets premium perfection.
           </motion.p>
         </div>
 
-        <div className="relative h-[550px] flex items-center justify-center">
+        <div className="relative h-[480px] md:h-[580px] flex items-center justify-center">
           {/* Controls */}
           <button 
             onClick={handlePrev}
-            className="absolute left-4 md:left-10 z-30 p-3 rounded-full bg-white/80 shadow-lg text-[#1b4332] hover:bg-[#1b4332] hover:text-white transition-all duration-300 border border-gray-100"
+            className="absolute left-2 md:left-8 z-30 p-2 md:p-3 rounded-full bg-white/90 shadow-lg text-[#1b4332] hover:bg-[#1b4332] hover:text-white transition-all duration-300 border border-gray-100/50 backdrop-blur-sm"
           >
-            <ChevronLeft size={24} />
+            <ChevronLeft size={20} className="md:w-6 md:h-6" />
           </button>
           
           <button 
             onClick={handleNext}
-            className="absolute right-4 md:right-10 z-30 p-3 rounded-full bg-white/80 shadow-lg text-[#1b4332] hover:bg-[#1b4332] hover:text-white transition-all duration-300 border border-gray-100"
+            className="absolute right-2 md:right-8 z-30 p-2 md:p-3 rounded-full bg-white/90 shadow-lg text-[#1b4332] hover:bg-[#1b4332] hover:text-white transition-all duration-300 border border-gray-100/50 backdrop-blur-sm"
           >
-            <ChevronRight size={24} />
+            <ChevronRight size={20} className="md:w-6 md:h-6" />
           </button>
 
           {/* Showcase Items */}
-          <div className="relative w-full max-w-5xl h-full flex items-center justify-center">
-            <AnimatePresence mode="popLayout">
+          <div className="relative w-full max-w-6xl h-full flex items-center justify-center">
+            <AnimatePresence mode="popLayout" initial={false}>
               {getVisibleItems().map((item) => (
                 <motion.div
                   key={`${item.id}-${item.position}`}
                   initial={{ 
                     opacity: 0,
                     scale: 0.6,
-                    x: item.position * 300,
-                    filter: "blur(4px)"
+                    x: item.position * 350,
+                    filter: "blur(10px)"
                   }}
                   animate={{ 
-                    opacity: item.position === 0 ? 1 : 0.4,
-                    scale: item.position === 0 ? 1.2 : 0.7,
-                    x: item.position * (window.innerWidth < 768 ? 160 : 320),
-                    filter: item.position === 0 ? "blur(0px)" : "blur(2px)",
+                    opacity: item.position === 0 ? 1 : 0.3,
+                    scale: item.position === 0 ? 1.15 : 0.75,
+                    x: item.position * (window.innerWidth < 768 ? 140 : 380),
+                    filter: item.position === 0 ? "blur(0px)" : "blur(4px)",
                     zIndex: item.position === 0 ? 20 : 10
                   }}
                   exit={{ 
                     opacity: 0,
                     scale: 0.6,
-                    x: item.position * 300,
-                    filter: "blur(4px)"
+                    x: item.position * 350,
+                    filter: "blur(10px)"
                   }}
                   transition={{ 
                     type: "spring",
-                    stiffness: 260,
-                    damping: 25
+                    stiffness: 220,
+                    damping: 28
                   }}
                   className="absolute flex flex-col items-center"
                 >
                   <div className={`
-                    relative w-56 h-56 md:w-96 md:h-96 rounded-full p-2
-                    ${item.position === 0 ? 'bg-gradient-to-tr from-[#1b4332] to-[#4caf50] shadow-[0_0_60px_rgba(27,67,50,0.4)]' : 'bg-transparent'}
+                    relative w-52 h-52 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full p-2.5 transition-shadow duration-700
+                    ${item.position === 0 
+                      ? 'bg-gradient-to-tr from-[#1b4332] to-[#4caf50] shadow-[0_20px_60px_-15px_rgba(27,67,50,0.4)] ring-4 ring-white/50' 
+                      : 'bg-transparent ring-0'}
                   `}>
-                    <div className="w-full h-full rounded-full overflow-hidden border-4 border-white shadow-inner bg-white relative">
+                    <div className="w-full h-full rounded-full overflow-hidden border-2 border-white shadow-inner bg-white">
                       <img 
                         src={item.image} 
                         alt={item.name}
                         className="w-full h-full object-cover"
                       />
-                      {/* Veg Icon */}
-                      <div className="absolute top-4 right-4 z-30 bg-white p-1 rounded-sm shadow-sm border border-gray-100">
-                        <div className="w-4 h-4 border-2 border-green-600 flex items-center justify-center p-[2px]">
-                          <div className="w-full h-full bg-green-600 rounded-full" />
-                        </div>
-                      </div>
                     </div>
                   </div>
 
                   {item.position === 0 && (
                     <motion.div
-                      initial={{ opacity: 0, y: 20 }}
+                      initial={{ opacity: 0, y: 15 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.2 }}
-                      className="mt-12 text-center max-w-sm px-4"
+                      transition={{ delay: 0.25, duration: 0.5 }}
+                      className="mt-12 text-center max-w-md px-4 flex flex-col items-center"
                     >
-                      <div className="flex items-center justify-center gap-3 mb-3">
+                      <div className="flex items-center justify-center gap-3 mb-4">
                         {/* Veg Icon beside name */}
-                        <div className="bg-white p-1 rounded-sm shadow-sm border border-gray-100 flex-shrink-0">
-                          <div className="w-4 h-4 border-2 border-green-600 flex items-center justify-center p-[2px]">
+                        <div className="bg-white p-1 rounded-sm shadow-sm border border-green-100 flex-shrink-0">
+                          <div className="w-4 h-4 border-2 border-green-600 flex items-center justify-center p-[2.5px]">
                             <div className="w-full h-full bg-green-600 rounded-full" />
                           </div>
                         </div>
-                        <h3 className="font-serif text-3xl md:text-4xl font-bold text-[#1b4332] uppercase tracking-wider">
+                        <h3 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-[#1b4332] uppercase tracking-wide leading-tight">
                           {item.name}
                         </h3>
                       </div>
-                      <p className="text-gray-500 text-sm md:text-base leading-relaxed">
+                      <p className="text-gray-400 text-sm md:text-base font-light leading-relaxed max-w-xs md:max-w-sm">
                         {item.description}
                       </p>
                     </motion.div>
@@ -278,7 +274,7 @@ export default function KrishnaSpecials() {
           </div>
         </div>
 
-        {/* No Progress Indicators - Removed as requested */}
+        {/* No Progress Indicators - Removed for clean aesthetic */}
       </div>
     </section>
   );
