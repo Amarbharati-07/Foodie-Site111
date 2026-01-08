@@ -86,23 +86,3 @@ export function useSubmitContact() {
     },
   });
 }
-
-export function useSubmitReservation() {
-  return useMutation({
-    mutationFn: async (data: z.infer<typeof api.reservation.submit.input>) => {
-      const validated = api.reservation.submit.input.parse(data);
-      const res = await fetch(api.reservation.submit.path, {
-        method: api.reservation.submit.method,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(validated),
-      });
-      
-      if (!res.ok) {
-        const error = await res.json();
-        throw new Error(error.message || "Failed to submit reservation");
-      }
-      
-      return api.reservation.submit.responses[200].parse(await res.json());
-    },
-  });
-}
