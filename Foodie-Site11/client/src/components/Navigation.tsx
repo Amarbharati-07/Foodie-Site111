@@ -30,28 +30,28 @@ export function Navigation() {
     <nav
       className={cn(
         "fixed w-full z-50 transition-all duration-300 font-sans",
-        scrolled ? "py-3" : "py-6"
+        scrolled ? "py-2" : "py-4"
       )}
     >
       <div className="container mx-auto px-4 md:px-6">
         <div className={cn(
-          "flex items-center justify-between px-8 py-4 rounded-full transition-all duration-300 border border-slate-100",
+          "flex items-center justify-between px-6 py-2 rounded-full transition-all duration-300 border border-slate-100",
           scrolled ? "bg-white/95 backdrop-blur-md shadow-lg" : "bg-white shadow-md"
         )}>
           <Link href="/">
             <div className="cursor-pointer">
-              <Logo className="h-16 md:h-24" />
+              <Logo className="h-10 md:h-14" />
             </div>
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center space-x-14">
+          <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
               <Link key={link.name} href={link.href}>
                 <div className={cn(
-                  "text-sm font-bold tracking-[0.15em] uppercase cursor-pointer relative py-1 transition-all duration-300",
+                  "text-xs font-bold tracking-[0.1em] uppercase cursor-pointer relative py-1 transition-all duration-300",
                   location === link.href 
-                    ? "text-[#52b788] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[3px] after:bg-[#52b788]" 
+                    ? "text-[#52b788] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-[#52b788]" 
                     : "text-[#4b5563] hover:text-[#52b788]"
                 )}>
                   {link.name}
@@ -61,11 +61,11 @@ export function Navigation() {
             <a 
               href="tel:+917028684786" 
               className={cn(
-                "flex items-center space-x-3 px-10 py-4 rounded-full font-bold text-base transition-all duration-300 shadow-sm",
+                "flex items-center space-x-2 px-6 py-2.5 rounded-full font-bold text-sm transition-all duration-300 shadow-sm",
                 "bg-[#52b788] text-white hover:bg-[#40916c] hover:shadow-md active:scale-95"
               )}
             >
-              <Phone size={18} fill="currentColor" />
+              <Phone size={14} fill="currentColor" />
               <span>Call Now</span>
             </a>
           </div>
