@@ -11,7 +11,7 @@ import { motion } from "framer-motion";
 const contactFormSchema = api.contact.submit.input;
 type ContactFormValues = z.infer<typeof contactFormSchema>;
 
-export default function Contact() {
+export default function Reservation() {
   const { toast } = useToast();
   const submitMutation = useSubmitContact();
   
@@ -29,8 +29,8 @@ export default function Contact() {
     submitMutation.mutate(data, {
       onSuccess: () => {
         toast({
-          title: "Message Sent!",
-          description: "Thank you for contacting us. We will get back to you shortly.",
+          title: "Reservation Request Sent!",
+          description: "Thank you for choosing us. We will confirm your table shortly.",
         });
         form.reset();
       },
@@ -49,9 +49,9 @@ export default function Contact() {
       {/* Header */}
       <div className="bg-foreground text-white py-16">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="font-serif text-5xl font-bold mb-4">Get in Touch</h1>
+          <h1 className="font-serif text-5xl font-bold mb-4">Book a Table</h1>
           <p className="text-gray-300 max-w-xl mx-auto text-lg">
-            We'd love to hear from you. Whether it's a reservation, feedback, or a catering query.
+            Plan your perfect dining experience. Secure your table at Shri Krishna Pure Vegetarian.
           </p>
         </div>
       </div>
@@ -134,8 +134,8 @@ export default function Contact() {
             className="lg:w-2/3"
           >
             <div className="bg-white p-8 md:p-10 rounded-2xl shadow-xl border border-border">
-              <h3 className="font-serif text-3xl font-bold mb-2">Send us a Message</h3>
-              <p className="text-muted-foreground mb-8">We value your feedback and queries.</p>
+              <h3 className="font-serif text-3xl font-bold mb-2">Table Reservation</h3>
+              <p className="text-muted-foreground mb-8">Please fill in the details to request a table.</p>
 
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -186,7 +186,7 @@ export default function Contact() {
                   disabled={submitMutation.isPending}
                   className="w-full md:w-auto px-10 py-4 bg-primary text-white font-bold rounded-lg shadow-lg shadow-primary/30 hover:shadow-xl hover:-translate-y-1 hover:bg-primary/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                 >
-                  {submitMutation.isPending ? "Sending..." : "Send Message"}
+                  {submitMutation.isPending ? "Requesting..." : "Reserve Now"}
                 </button>
               </form>
             </div>
