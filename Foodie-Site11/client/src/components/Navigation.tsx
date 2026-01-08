@@ -34,7 +34,13 @@ export function Navigation() {
       )}
     >
       <div className="container mx-auto px-4 md:px-6">
-        <div className="flex items-center justify-center relative">
+        <div className="flex items-center justify-between relative">
+          <Link href="/">
+            <div className="cursor-pointer">
+              <Logo />
+            </div>
+          </Link>
+
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center space-x-12">
             {navLinks.map((link) => (
