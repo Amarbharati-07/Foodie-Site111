@@ -234,12 +234,18 @@ export default function KrishnaSpecials() {
                     relative w-56 h-56 md:w-96 md:h-96 rounded-full p-2
                     ${item.position === 0 ? 'bg-gradient-to-tr from-[#1b4332] to-[#4caf50] shadow-[0_0_60px_rgba(27,67,50,0.4)]' : 'bg-transparent'}
                   `}>
-                    <div className="w-full h-full rounded-full overflow-hidden border-4 border-white shadow-inner bg-white">
+                    <div className="w-full h-full rounded-full overflow-hidden border-4 border-white shadow-inner bg-white relative">
                       <img 
                         src={item.image} 
                         alt={item.name}
                         className="w-full h-full object-cover"
                       />
+                      {/* Veg Icon */}
+                      <div className="absolute top-4 right-4 z-30 bg-white p-1 rounded-sm shadow-sm border border-gray-100">
+                        <div className="w-4 h-4 border-2 border-green-600 flex items-center justify-center p-[2px]">
+                          <div className="w-full h-full bg-green-600 rounded-full" />
+                        </div>
+                      </div>
                     </div>
                   </div>
 
