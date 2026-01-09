@@ -169,7 +169,7 @@ export default function KrishnaSpecials() {
             className="font-serif text-3xl md:text-5xl font-bold mb-3"
           >
             <span className="text-[#1b4332]">Shri Krishna</span>{" "}
-            <span className="text-[#1b4332]">Special Cuisine</span>
+            <span className="text-[#1b4332]">Sattvic Food</span>
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
