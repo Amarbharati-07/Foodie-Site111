@@ -29,32 +29,30 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative w-full h-screen flex items-center justify-center overflow-hidden">
         {/* Background Video with Overlay */}
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 bg-black">
           <div className="absolute inset-0 bg-black/50 z-10 pointer-events-none" />
           <div className="absolute inset-0 bg-primary/10 z-10 pointer-events-none mix-blend-overlay" />
           
-          <AnimatePresence mode="wait">
+          {HERO_VIDEOS.map((video, index) => (
             <motion.div
-              key={currentVideoIndex}
+              key={video}
               initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1 }}
+              animate={{ opacity: currentVideoIndex === index ? 1 : 0 }}
+              transition={{ duration: 1.5, ease: "easeInOut" }}
               className="absolute inset-0 w-full h-full"
             >
               <video
-                key={HERO_VIDEOS[currentVideoIndex]}
                 autoPlay
                 muted
                 loop
                 playsInline
+                preload="auto"
                 className="w-full h-full object-cover"
               >
-                <source src={HERO_VIDEOS[currentVideoIndex]} type="video/mp4" />
-                Your browser does not support the video tag.
+                <source src={video} type="video/mp4" />
               </video>
             </motion.div>
-          </AnimatePresence>
+          ))}
         </div>
 
         <div className="relative z-20 container mx-auto px-4 text-center text-white space-y-8">
