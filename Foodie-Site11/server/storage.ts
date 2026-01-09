@@ -18,23 +18,45 @@ export interface IStorage {
   createReservation(reservation: InsertReservation): Promise<void>;
   getReviews(): Promise<Review[]>;
   createReview(review: InsertReview): Promise<Review>;
-  seedData(): Promise<void>;
 }
 
-export class DatabaseStorage implements IStorage {
-  private reservationFile = path.resolve(process.cwd(), "reservation.json");
-  private reviewsFile = path.resolve(process.cwd(), "reviews.json");
+export class FileStorage implements IStorage {
+  private dataDir = path.resolve(process.cwd(), "data");
+  private reservationFile = path.resolve(this.dataDir, "reservations.json");
+  private reviewsFile = path.resolve(this.dataDir, "reviews.json");
+  private contactFile = path.resolve(this.dataDir, "contact.json");
+  
   private categories: Category[] = [];
   private menuItems: MenuItem[] = [];
-  private contactMessages: any[] = [];
 
-  async getReviews(): Promise<Review[]> {
+  constructor() {
+    this.seedData();
+  }
+
+  private async ensureDir() {
     try {
-      const data = await fs.readFile(this.reviewsFile, "utf-8");
+      await fs.access(this.dataDir);
+    } catch {
+      await fs.mkdir(this.dataDir, { recursive: true });
+    }
+  }
+
+  private async readJson<T>(filePath: string): Promise<T[]> {
+    try {
+      const data = await fs.readFile(filePath, "utf-8");
       return JSON.parse(data);
-    } catch (e) {
+    } catch {
       return [];
     }
+  }
+
+  private async writeJson<T>(filePath: string, data: T[]) {
+    await this.ensureDir();
+    await fs.writeFile(filePath, JSON.stringify(data, null, 2));
+  }
+
+  async getReviews(): Promise<Review[]> {
+    return this.readJson<Review>(this.reviewsFile);
   }
 
   async createReview(review: InsertReview): Promise<Review> {
@@ -45,7 +67,7 @@ export class DatabaseStorage implements IStorage {
       ...review
     };
     reviews.push(newReview);
-    await fs.writeFile(this.reviewsFile, JSON.stringify(reviews, null, 2));
+    await this.writeJson(this.reviewsFile, reviews);
     return newReview;
   }
 
@@ -69,35 +91,22 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createContactMessage(message: InsertContactMessage): Promise<void> {
-    this.contactMessages.push({ id: Date.now(), ...message });
+    const messages = await this.readJson<any>(this.contactFile);
+    messages.push({ id: Date.now(), ...message });
+    await this.writeJson(this.contactFile, messages);
   }
 
   async createReservation(reservation: InsertReservation): Promise<void> {
-    try {
-      let currentReservations: any[] = [];
-      try {
-        const data = await fs.readFile(this.reservationFile, "utf-8");
-        currentReservations = JSON.parse(data);
-      } catch (e) {
-        currentReservations = [];
-      }
-      
-      const newReservation = {
-        id: Date.now(),
-        ...reservation
-      };
-      
-      currentReservations.push(newReservation);
-      await fs.writeFile(this.reservationFile, JSON.stringify(currentReservations, null, 2));
-    } catch (error) {
-      console.error("Error saving reservation to file:", error);
-      throw new Error("Failed to save reservation locally.");
-    }
+    const reservations = await this.readJson<any>(this.reservationFile);
+    const newReservation = {
+      id: Date.now(),
+      ...reservation
+    };
+    reservations.push(newReservation);
+    await this.writeJson(this.reservationFile, reservations);
   }
 
-  async seedData(): Promise<void> {
-    if (this.categories.length > 0) return;
-
+  private seedData() {
     const catsData = [
       { id: 1, name: "Breakfast & Snacks", slug: "breakfast", bannerImage: "https://images.unsplash.com/photo-1593560708920-63984dc86f71?auto=format&fit=crop&q=80" },
       { id: 2, name: "Sandwich", slug: "sandwich", bannerImage: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&q=80" },
@@ -166,4 +175,5 @@ export class DatabaseStorage implements IStorage {
   }
 }
 
-export const storage = new DatabaseStorage();
+export const storage = new FileStorage();
+
