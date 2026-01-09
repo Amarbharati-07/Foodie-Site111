@@ -7,8 +7,9 @@ import KrishnaSpecials from "../components/KrishnaSpecials";
 import Reviews from "./Reviews";
 import video1 from "../assets/generated_videos/chef_preparing_fresh_vegetarian_meal.mp4";
 import video2 from "../assets/generated_videos/premium_vegetarian_restaurant_interior_ambiance.mp4";
+import video3 from "../assets/generated_videos/fresh_food_serving.mp4";
 
-const HERO_VIDEOS = [video1, video2];
+const HERO_VIDEOS = [video1, video2, video3];
 
 export default function Home() {
   const { data: categories } = useCategories();
