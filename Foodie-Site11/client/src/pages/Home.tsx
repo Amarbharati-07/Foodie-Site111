@@ -5,12 +5,10 @@ import { useCategories } from "../hooks/use-restaurant";
 import { useState, useEffect } from "react";
 import KrishnaSpecials from "../components/KrishnaSpecials";
 import Reviews from "./Reviews";
+import video1 from "../assets/generated_videos/chef_preparing_fresh_vegetarian_meal.mp4";
+import video2 from "../assets/generated_videos/premium_vegetarian_restaurant_interior_ambiance.mp4";
 
-const HERO_VIDEOS = [
-  "https://www.youtube.com/embed/5mYV_jF_r5U?autoplay=1&mute=1&controls=0&loop=1&playlist=5mYV_jF_r5U&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1",
-  "https://www.youtube.com/embed/S_8qK2Uj-y8?autoplay=1&mute=1&controls=0&loop=1&playlist=S_8qK2Uj-y8&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1",
-  "https://www.youtube.com/embed/N-kEBeC-X5k?autoplay=1&mute=1&controls=0&loop=1&playlist=N-kEBeC-X5k&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1",
-];
+const HERO_VIDEOS = [video1, video2];
 
 export default function Home() {
   const { data: categories } = useCategories();
@@ -44,13 +42,17 @@ export default function Home() {
               transition={{ duration: 1 }}
               className="absolute inset-0 w-full h-full"
             >
-              <iframe
-                src={HERO_VIDEOS[currentVideoIndex]}
-                className="absolute top-1/2 left-1/2 w-[115%] h-[115%] -translate-x-1/2 -translate-y-1/2 object-cover"
-                allow="autoplay; encrypted-media"
-                style={{ pointerEvents: 'none', border: 'none' }}
-                title="Hero Background Video"
-              />
+              <video
+                key={HERO_VIDEOS[currentVideoIndex]}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover"
+              >
+                <source src={HERO_VIDEOS[currentVideoIndex]} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
             </motion.div>
           </AnimatePresence>
         </div>
