@@ -57,63 +57,19 @@ export default function Home() {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative w-full h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Image Slideshow with Overlay */}
+        {/* Background Video with Overlay */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-black/50 z-10 pointer-events-none" />
-          
-          {/* Video Background */}
-          <motion.div
-            initial={false}
-            animate={{ 
-              opacity: currentImageIndex === HERO_IMAGES.length ? 1 : 0,
-            }}
-            transition={{ 
-              duration: 1.5,
-              ease: "easeInOut"
-            }}
-            className="absolute inset-0"
-            style={{
-              zIndex: currentImageIndex === HERO_IMAGES.length ? 1 : 0,
-            }}
+          <div className="absolute inset-0 bg-black/40 z-10 pointer-events-none" />
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
           >
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              key="hero-video"
-              className="w-full h-full object-cover"
-            >
-              <source src={heroVideo} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </motion.div>
-
-          {/* Image Slideshow */}
-          {HERO_IMAGES.map((src, index) => (
-            <motion.div
-              key={src}
-              initial={false}
-              animate={{ 
-                opacity: index === currentImageIndex ? 1 : 0,
-              }}
-              transition={{ 
-                duration: 1.5,
-                ease: "easeInOut"
-              }}
-              className="absolute inset-0"
-              style={{
-                backgroundImage: `url(${src})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat',
-                width: '100vw',
-                height: '100vh',
-                zIndex: index === currentImageIndex ? 1 : 0,
-                willChange: 'opacity'
-              }}
-            />
-          ))}
+            <source src={heroVideo} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         </div>
 
         <div className="relative z-20 container mx-auto px-4 text-center text-white space-y-8">
