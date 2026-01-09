@@ -159,34 +159,34 @@ export default function Home() {
       </section>
 
       {/* Info Bar */}
-      <div className="bg-white py-8 border-b border-border">
+      <div className="bg-white py-6 border-b border-border">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="flex items-center justify-center space-x-4">
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                <Clock />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="flex items-center justify-center space-x-3">
+              <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                <Clock size={20} />
               </div>
               <div className="text-center md:text-left">
-                <h3 className="font-serif font-bold text-lg">Opening Hours</h3>
-                <p className="text-sm text-muted-foreground">Mon-Sun: 8:45 AM - 10:45 PM</p>
+                <h3 className="font-serif font-bold text-base">Opening Hours</h3>
+                <p className="text-xs text-muted-foreground">Mon-Sun: 8:45 AM - 10:45 PM</p>
               </div>
             </div>
-            <div className="flex items-center justify-center space-x-4">
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                <MapPin />
+            <div className="flex items-center justify-center space-x-3">
+              <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                <MapPin size={20} />
               </div>
               <div className="text-center md:text-left">
-                <h3 className="font-serif font-bold text-lg">Location</h3>
-                <p className="text-sm text-muted-foreground">Ambernath (West), Thane</p>
+                <h3 className="font-serif font-bold text-base">Location</h3>
+                <p className="text-xs text-muted-foreground">Ambernath (West), Thane</p>
               </div>
             </div>
-            <div className="flex items-center justify-center space-x-4">
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                <Star className="fill-current" />
+            <div className="flex items-center justify-center space-x-3">
+              <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                <Star size={20} className="fill-current" />
               </div>
               <div className="text-center md:text-left">
-                <h3 className="font-serif font-bold text-lg">4.0/5 Rating</h3>
-                <p className="text-sm text-muted-foreground">Loved by 1000+ Customers</p>
+                <h3 className="font-serif font-bold text-base">4.0/5 Rating</h3>
+                <p className="text-xs text-muted-foreground">Loved by 1000+ Customers</p>
               </div>
             </div>
           </div>
@@ -196,17 +196,17 @@ export default function Home() {
       <KrishnaSpecials />
 
       {/* Featured Categories */}
-      <section className="py-24 bg-background">
+      <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-primary font-bold tracking-widest uppercase text-sm">Discover</span>
-            <h2 className="font-serif text-4xl md:text-5xl font-bold mt-3 mb-6">Our Menu Highlights</h2>
-            <p className="text-muted-foreground text-lg">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <span className="text-primary font-bold tracking-widest uppercase text-xs">Discover</span>
+            <h2 className="font-serif text-3xl md:text-4xl font-bold mt-2 mb-4">Our Menu Highlights</h2>
+            <p className="text-muted-foreground text-base">
               From crispy Dosas to rich Paneer gravies, explore our wide range of pure vegetarian delights suited for every palate.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {featuredCategories.length > 0 ? (
               featuredCategories.map((cat, idx) => (
                 <Link key={cat.id} href={`/menu`}>

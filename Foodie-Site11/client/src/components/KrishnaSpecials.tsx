@@ -156,17 +156,17 @@ export default function KrishnaSpecials() {
 
   return (
     <section 
-      className="py-16 md:py-20 bg-white overflow-hidden relative"
+      className="py-12 md:py-16 bg-white overflow-hidden relative"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
+        <div className="text-center mb-8 md:mb-10">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold mb-4"
+            className="font-serif text-3xl md:text-5xl font-bold mb-3"
           >
             <span className="text-[#1b4332]">Shri Krishna</span>{" "}
             <span className="text-[#1b4332]">Special Cuisine</span>
@@ -176,13 +176,13 @@ export default function KrishnaSpecials() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-gray-500 text-base md:text-lg max-w-2xl mx-auto italic font-light"
+            className="text-gray-500 text-sm md:text-base max-w-2xl mx-auto italic font-light"
           >
             Indulge in pure vegetarian culinary artistry, where tradition meets premium perfection.
           </motion.p>
         </div>
 
-        <div className="relative h-[480px] md:h-[580px] flex items-center justify-center">
+        <div className="relative h-[400px] md:h-[500px] flex items-center justify-center">
           {/* Controls */}
           <button 
             onClick={handlePrev}
@@ -231,9 +231,9 @@ export default function KrishnaSpecials() {
                   className="absolute flex flex-col items-center"
                 >
                   <div className={`
-                    relative w-52 h-52 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full p-2.5 transition-shadow duration-700
+                    relative w-44 h-44 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-full p-2 transition-shadow duration-700
                     ${item.position === 0 
-                      ? 'bg-gradient-to-tr from-[#1b4332] to-[#4caf50] shadow-[0_20px_60px_-15px_rgba(27,67,50,0.4)] ring-4 ring-white/50' 
+                      ? 'bg-gradient-to-tr from-[#1b4332] to-[#4caf50] shadow-[0_15px_45px_-10px_rgba(27,67,50,0.4)] ring-4 ring-white/50' 
                       : 'bg-transparent ring-0'}
                   `}>
                     <div className="w-full h-full rounded-full overflow-hidden border-2 border-white shadow-inner bg-white">
@@ -250,20 +250,20 @@ export default function KrishnaSpecials() {
                       initial={{ opacity: 0, y: 15 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.25, duration: 0.5 }}
-                      className="mt-12 text-center max-w-md px-4 flex flex-col items-center"
+                      className="mt-8 text-center max-w-md px-4 flex flex-col items-center"
                     >
-                      <div className="flex items-center justify-center gap-3 mb-4">
+                      <div className="flex items-center justify-center gap-2 mb-2">
                         {/* Veg Icon beside name */}
-                        <div className="bg-white p-1 rounded-sm shadow-sm border border-green-100 flex-shrink-0">
-                          <div className="w-4 h-4 border-2 border-green-600 flex items-center justify-center p-[2.5px]">
+                        <div className="bg-white p-0.5 rounded-sm shadow-sm border border-green-100 flex-shrink-0">
+                          <div className="w-3 h-3 border border-green-600 flex items-center justify-center p-[1.5px]">
                             <div className="w-full h-full bg-green-600 rounded-full" />
                           </div>
                         </div>
-                        <h3 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-[#1b4332] uppercase tracking-wide leading-tight">
+                        <h3 className="font-serif text-2xl md:text-3xl font-bold text-[#1b4332] uppercase tracking-wide">
                           {item.name}
                         </h3>
                       </div>
-                      <p className="text-[#2d3436] text-base md:text-lg font-medium leading-relaxed max-w-sm mx-auto">
+                      <p className="text-[#2d3436] text-sm md:text-base font-medium leading-tight max-w-sm mx-auto">
                         {item.description}
                       </p>
                     </motion.div>
