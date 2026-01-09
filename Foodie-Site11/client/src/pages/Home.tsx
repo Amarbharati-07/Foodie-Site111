@@ -1,14 +1,27 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
 import { ArrowRight, Star, Clock, MapPin, Phone } from "lucide-react";
 import { useCategories } from "../hooks/use-restaurant";
 import { useState, useEffect } from "react";
 import KrishnaSpecials from "../components/KrishnaSpecials";
 import Reviews from "./Reviews";
-import heroVideo from "@assets/generated_videos/vegetarian_restaurant_with_delicious_food..mp4";
+
+const HERO_VIDEOS = [
+  "https://www.youtube.com/embed/5mYV_jF_r5U?autoplay=1&mute=1&controls=0&loop=1&playlist=5mYV_jF_r5U&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1",
+  "https://www.youtube.com/embed/0_m3TOCt60c?autoplay=1&mute=1&controls=0&loop=1&playlist=0_m3TOCt60c&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1",
+  "https://www.youtube.com/embed/N-kEBeC-X5k?autoplay=1&mute=1&controls=0&loop=1&playlist=N-kEBeC-X5k&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1",
+];
 
 export default function Home() {
   const { data: categories } = useCategories();
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentVideoIndex((prev) => (prev + 1) % HERO_VIDEOS.length);
+    }, 8000);
+    return () => clearInterval(timer);
+  }, []);
 
   // Featured categories for the home page
   const featuredCategories = categories?.slice(0, 6) || [];
@@ -19,17 +32,26 @@ export default function Home() {
       <section className="relative w-full h-screen flex items-center justify-center overflow-hidden">
         {/* Background Video with Overlay */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-black/40 z-10 pointer-events-none" />
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="w-full h-full object-cover"
-          >
-            <source src={heroVideo} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+          <div className="absolute inset-0 bg-black/50 z-10 pointer-events-none" />
+          <div className="absolute inset-0 bg-primary/10 z-10 pointer-events-none mix-blend-overlay" />
+          
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentVideoIndex}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1 }}
+              className="absolute inset-0 w-full h-full"
+            >
+              <iframe
+                src={HERO_VIDEOS[currentVideoIndex]}
+                className="absolute top-1/2 left-1/2 w-[115%] h-[115%] -translate-x-1/2 -translate-y-1/2 object-cover"
+                allow="autoplay; encrypted-media"
+                style={{ pointerEvents: 'none' }}
+              />
+            </motion.div>
+          </AnimatePresence>
         </div>
 
         <div className="relative z-20 container mx-auto px-4 text-center text-white space-y-8">
