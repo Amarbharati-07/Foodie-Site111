@@ -30,16 +30,16 @@ export function Navigation() {
   return (
     <nav
       className={cn(
-        "fixed w-full z-50 transition-all duration-500",
-        scrolled ? "py-2" : "py-6"
+        "fixed top-0 left-0 w-full z-[100] transition-all duration-500",
+        scrolled ? "py-2" : "py-4"
       )}
     >
       <div className="container mx-auto px-4 md:px-6">
         <div className={cn(
-          "flex items-center justify-between px-6 md:px-10 py-3 rounded-full transition-all duration-500",
+          "flex items-center justify-between px-6 md:px-10 py-3 rounded-full transition-all duration-500 border",
           scrolled 
-            ? "bg-white/80 backdrop-blur-lg shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/20" 
-            : "bg-white/40 backdrop-blur-sm border border-white/10"
+            ? "bg-white/95 backdrop-blur-md shadow-[0_8px_30px_rgb(0,0,0,0.08)] border-white/20" 
+            : "bg-white/90 backdrop-blur-sm border-white/10 shadow-sm"
         )}>
           <Link href="/">
             <div className="cursor-pointer transition-transform duration-500 hover:scale-105">
