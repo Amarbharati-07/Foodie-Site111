@@ -1,4 +1,4 @@
-import { motion } from "react";
+import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { ArrowRight, Star, Clock, MapPin, Phone } from "lucide-react";
 import { useCategories } from "../hooks/use-restaurant";
@@ -68,7 +68,8 @@ export default function Home() {
               opacity: currentImageIndex === HERO_IMAGES.length ? 1 : 0,
             }}
             transition={{ 
-              opacity: { duration: 1.5, ease: "easeInOut" }
+              duration: 1.5,
+              ease: "easeInOut"
             }}
             className="absolute inset-0"
             style={{
@@ -97,7 +98,8 @@ export default function Home() {
                 opacity: index === currentImageIndex ? 1 : 0,
               }}
               transition={{ 
-                opacity: { duration: 1.5, ease: "easeInOut" }
+                duration: 1.5,
+                ease: "easeInOut"
               }}
               className="absolute inset-0"
               style={{
@@ -303,9 +305,9 @@ export default function Home() {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => {
-          const restaurantDetails = `Hello\n\nThank you for contacting Shri Krishna Pure Vegetarian.\n\nRestaurant Name: Shri Krishna Pure Vegetarian\nAddress: Ambernath, Maharashtra, India\nContact Number: +91 9372842906\nEmail ID: shrikrishnapureveg@gmail.com\n\nPlease find our complete food menu attached for your reference.\n\nWe look forward to serving you.`;
+          const restaurantDetails = "Hello\\n\\nThank you for contacting Shri Krishna Pure Vegetarian.\\n\\nRestaurant Name: Shri Krishna Pure Vegetarian\\nAddress: Ambernath, Maharashtra, India\\nContact Number: +91 9372842906\\nEmail ID: shrikrishnapureveg@gmail.com\\n\\nPlease find our complete food menu attached for your reference.\\n\\nWe look forward to serving you.";
           const msg = encodeURIComponent(restaurantDetails);
-          window.open(`https://wa.me/919372842906?text=${msg}`, '_blank');
+          window.open("https://wa.me/919372842906?text=" + msg, "_blank");
         }}
         className="fixed bottom-8 right-8 z-[100] bg-[#25D366] text-white p-4 rounded-full shadow-2xl shadow-green-500/40 group overflow-hidden"
       >
