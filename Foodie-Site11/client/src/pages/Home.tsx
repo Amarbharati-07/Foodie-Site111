@@ -7,48 +7,8 @@ import KrishnaSpecials from "../components/KrishnaSpecials";
 import Reviews from "./Reviews";
 import heroVideo from "@assets/generated_videos/vegetarian_restaurant_with_delicious_food..mp4";
 
-const HERO_IMAGES = [
-  "https://images.unsplash.com/photo-1517244683847-745431f57235?q=80&w=2000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1606491956689-2ea28c674675?q=80&w=2000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?q=80&w=2000&auto=format&fit=crop"
-];
-
 export default function Home() {
   const { data: categories } = useCategories();
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [imagesPreloaded, setImagesPreloaded] = useState(false);
-
-  useEffect(() => {
-    // Preload images
-    let loadedCount = 0;
-    const preloadImages = () => {
-      HERO_IMAGES.forEach((src) => {
-        const img = new Image();
-        img.src = src;
-        img.onload = () => {
-          loadedCount++;
-          if (loadedCount === HERO_IMAGES.length) {
-            setImagesPreloaded(true);
-          }
-        };
-        img.onerror = () => {
-          loadedCount++;
-          if (loadedCount === HERO_IMAGES.length) {
-            setImagesPreloaded(true);
-          }
-        };
-      });
-    };
-    preloadImages();
-  }, []);
-
-  useEffect(() => {
-    if (!imagesPreloaded) return;
-    const timer = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % (HERO_IMAGES.length + 1));
-    }, 5000);
-    return () => clearInterval(timer);
-  }, [imagesPreloaded]);
 
   // Featured categories for the home page
   const featuredCategories = categories?.slice(0, 6) || [];
